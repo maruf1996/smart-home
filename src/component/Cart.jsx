@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 
+import { toast } from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import { deleteShoppingCart, removeFromDb } from '../utilits/FakeDb'
 import CartItem from './CartItem'
@@ -12,10 +13,10 @@ const Cart = () => {
     const remaining = cart.filter(product => product.id !== id)
     setCart(remaining)
     removeFromDb(id)
+    toast.success('Cart is Removed')
   }
 
   let total = 0
-
   for (const product of cart) {
     total = total + product.price * product.quantity
   }
@@ -24,10 +25,9 @@ const Cart = () => {
     if (cart.length) {
       setCart([])
       deleteShoppingCart()
-      return;
+      return toast.success('Order Placed!', { autoClose: 500 })
     }
-
-    return;
+    return toast.error('Cart is empty', { autoClose: 500 })
   }
 
   return (

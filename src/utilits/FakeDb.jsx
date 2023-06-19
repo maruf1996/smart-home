@@ -45,4 +45,5 @@ const addToDb = id => {
     localStorage.removeItem('shopping-cart')
   }
   
-  export { addToDb, getStoredCart, removeFromDb, deleteShoppingCart }
+  export { addToDb, deleteShoppingCart, getStoredCart, removeFromDb }
+
