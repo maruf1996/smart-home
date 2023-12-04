@@ -1,37 +1,45 @@
 import { createBrowserRouter } from "react-router-dom";
-import About from "../component/About";
-import Cart from "../component/Cart";
 import Error from "../component/Error";
-import Home from "../component/Home";
+import About from "../component/Page/About";
+import Course from "../component/Page/Course";
+import Home from "../component/Page/Home";
+import Login from "../component/Page/Login";
+import Register from "../component/Page/Register";
 import Root from "../component/Root";
-import Shop from "../component/Shop";
-import { ProductAndsCartData } from "../loaders/getCart&Products";
+import PrivateRoute from "./PrivateRoute";
 
-const routes=createBrowserRouter([
-    {
-        path:'/',
-        element:<Root></Root>,
-        errorElement:<Error></Error>,
-        loader:ProductAndsCartData,
-        children:[
-            {
-                path:'/',
-                element:<Home></Home>
-            },
-            {
-                path:'/about',
-                element:<About></About>
-            },
-            {
-                path:'/shop',
-                element:<Shop></Shop>
-            },
-            {
-                path:'/cart',
-                element:<Cart></Cart>
-            }
-        ]
-    }
-])
+const routes = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root></Root>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/course/:id",
+        element: (
+          <PrivateRoute>
+            <Course></Course>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/about",
+        element: <About></About>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
+  },
+]);
 
 export default routes;
